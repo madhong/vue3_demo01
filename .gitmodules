@@ -1,0 +1,3 @@
+[submodule "src/components/basic-module"]
+	path = src/components/basic-module
+	url = https://github.com/madhong/child_module.git
