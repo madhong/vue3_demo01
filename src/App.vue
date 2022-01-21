@@ -2,7 +2,6 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div>000</div>
-  <ccc></ccc>
 </template>
 
 <script>
