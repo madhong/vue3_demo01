@@ -1,87 +1,70 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <child-module></child-module>
-  </div>
+  <a-menu
+    id="dddddd"
+    v-model:openKeys="openKeys"
+    v-model:selectedKeys="selectedKeys"
+    style="width: 256px"
+    mode="inline"
+    @click="handleClick"
+  >
+    <a-sub-menu key="sub2" @titleClick="titleClick">
+      <template #icon>
+        <AppstoreOutlined />
+      </template>
+      <template #title>目录 Two</template>
+      <a-menu-item key="5">菜单 5</a-menu-item>
+      <a-menu-item key="6">菜单 6</a-menu-item>
+      <a-sub-menu key="sub3" title="Submenu">
+        <a-menu-item key="7">菜单 7</a-menu-item>
+        <a-menu-item key="8">菜单 8</a-menu-item>
+      </a-sub-menu>
+    </a-sub-menu>
+    <a-sub-menu key="sub4">
+      <template #icon>
+        <SettingOutlined />
+      </template>
+      <template #title>目录 Three</template>
+      <a-menu-item key="9">菜单 9</a-menu-item>
+      <a-menu-item key="10">菜单 10</a-menu-item>
+      <a-menu-item key="11">菜单 11</a-menu-item>
+      <a-menu-item key="12">菜单 12</a-menu-item>
+    </a-sub-menu>
+  </a-menu>
 </template>
-
 <script>
-import childModule from "../components/basic-module/src/App.vue";
-export default {
+import { defineComponent, ref, watch } from "vue";
+import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons-vue";
+export default defineComponent({
   name: "HelloWorld",
-  props: {
-    msg: String,
-  },
   components: {
-    childModule,
+    AppstoreOutlined,
+    SettingOutlined,
   },
-};
-</script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+  setup() {
+    const selectedKeys = ref(["1"]);
+    const openKeys = ref(["sub1"]);
+
+    const handleClick = (e) => {
+      console.log("click", e);
+    };
+
+    const titleClick = (e) => {
+      console.log("titleClick", e);
+    };
+
+    watch(
+      () => openKeys,
+      (val) => {
+        console.log("openKeys", val);
+      }
+    );
+    return {
+      selectedKeys,
+      openKeys,
+      handleClick,
+      titleClick,
+    };
+  },
+});
+</script>
